@@ -45,7 +45,7 @@ node {
 // ------------------------------- Run Jenkins Stages ------------------------------------------------
     stage("Pull Spring Music Artifacts") {
       sh '''
-        curl -u${ART_USERNAME}:${ART_PASSWORD} -O "http://3.17.145.188:8081/artifactory/chicago-workshop/spring-music-app.zip"
+        curl -u${ART_USERNAME}:${ART_PASSWORD} -O "${ARTIFACT_URL}/spring-music-app.zip"
         unzip spring-music-app.zip
         '''
     }
