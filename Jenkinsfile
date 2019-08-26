@@ -1,4 +1,5 @@
 #!/usr/bin/env groovy
+
 node {
   //Delete current directory
   deleteDir()
@@ -10,7 +11,7 @@ node {
     checkout scm
 
   // ------------------------------- Define Variables ------------------------------------------------
-    SPRING_APP = "spring-music-app"
+    SPRING_APP = "Spring-Music-App"
     APPLICATION_NAME = "${BUILD_USER_FIRST_NAME}-${SPRING_APP}"
     DEPLOY_SPACE = "Development"
     PCF_ORG = "csnpworkshop01"
