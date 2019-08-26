@@ -1,4 +1,5 @@
 #!/usr/bin/env groovy
+def APPLICATION_NAME
 
 node {
   //Delete current directory
@@ -80,20 +81,21 @@ node {
       // Build & Test our spring application using Gradle Build Automation
       stage("Clean & Build") {
         sh '''
+          cd ~/$PROJECT_NAME/${SPRING_APP}
           ./gradlew clean build
           '''
       }
       // Upload our application jar file to Artifactory
       stage("Upload to Artifactory") {
         sh '''
-          cd ~/$PROJECT_NAME/build/libs
+          cd ~/$PROJECT_NAME/${SPRING_APP}/build/libs
           curl -u${ART_USERNAME}:${ART_PASSWORD} -T spring-music-1.0.${BUILD_NUMBER}.jar "${ARTIFACT_URL}${APPLICATION_NAME}_${BUILD_NUMBER}.jar"
           '''
       }
       // Deploy our application to Pivotal Web Services
       stage("Deploy to PCF ${DEPLOY_SPACE}") {
         sh '''
-          cd ~/$PROJECT_NAME/build/libs
+          cd ~/$PROJECT_NAME/${SPRING_APP}/build/libs
           cf login -a ${PCF_ENDPOINT} -u ${PCF_USERNAME} -p ${PCF_PASSWORD} --skip-ssl-validation
           cf target -o ${PCF_ORG} -s ${DEPLOY_SPACE}
           cf push ${APPLICATION_NAME} -p spring-music-1.0.${BUILD_NUMBER}.jar -b https://github.com/cloudfoundry/java-buildpack.git
