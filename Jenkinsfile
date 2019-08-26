@@ -1,6 +1,4 @@
 #!/usr/bin/env groovy
-def APPLICATION_NAME
-
 node {
   //Delete current directory
   deleteDir()
@@ -72,7 +70,8 @@ node {
           sh '''
             cd ${SPRING_APP}
             ./gradlew sonarqube \
-            -Dsonar.projectKey=${BUILD_USER_FIRST_NAME}-${APPLICATION_NAME} \
+            -Dsonar.projectName=${APPLICATION_NAME} \
+            -Dsonar.projectKey=${APPLICATION_NAME} \
             -Dsonar.host.url=${SONARQUBE_ENDPOINT} \
             -Dsonar.login=${SONARQUBE_TOKEN}
             '''
