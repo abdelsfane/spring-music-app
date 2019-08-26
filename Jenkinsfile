@@ -48,6 +48,7 @@ node {
         env.PCF_ENDPOINT = PCF_ENDPOINT
         env.DEPLOY_SPACE = DEPLOY_SPACE
         env.PCF_ORG = PCF_ORG
+        env.SPRING_APP = SPRING_APP
         env.ARTIFACT_URL = ARTIFACT_URL
         env.PCF_USERNAME = PCF_USERNAME
         env.PCF_PASSWORD = PCF_PASSWORD
