@@ -62,13 +62,13 @@ node {
         sh '''
           curl -u${ART_USERNAME}:${ART_PASSWORD} -O "${ARTIFACT_URL}/${SPRING_APP}.zip"
           unzip ${SPRING_APP}.zip
-          cd ${SPRING_APP}
           '''
       }
       // Run SonarQube Code Quality and Security Scan
       stage('SonarQube analysis') {
         withSonarQubeEnv() {
           sh '''
+            cd ${SPRING_APP}
             ./gradlew sonarqube \
             -Dsonar.projectKey=${APPLICATION_NAME} \
             -Dsonar.host.url=${SONARQUBE_ENDPOINT} \
