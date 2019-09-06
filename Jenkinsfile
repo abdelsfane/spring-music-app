@@ -11,10 +11,10 @@ node {
     checkout scm
 
   // ------------------------------- Define Variables ------------------------------------------------
-    SPRING_APP = "Spring-Music-App"
+    SPRING_APP = "spring-music-app"
     APPLICATION_NAME = "${BUILD_USER_FIRST_NAME}-${SPRING_APP}"
     DEPLOY_SPACE = "Development"
-    PCF_ORG = "csnpworkshop01"
+    PCF_ORG = "my_first_workshop"
     ARTIFACT_URL = "http://3.17.145.188:8081/artifactory/chicago-workshop/"
     SONARQUBE_ENDPOINT = "http://18.188.152.100:9000"
     PCF_ENDPOINT = "https://api.run.pivotal.io"
@@ -30,7 +30,7 @@ node {
       ],
       [
       $class          : 'UsernamePasswordMultiBinding',
-      credentialsId   : 'abdel_pcf_user',
+      credentialsId   : 'yourname_pcf_user',
       passwordVariable: 'PCF_PASSWORD',
       usernameVariable: 'PCF_USERNAME'
       ],[
@@ -61,7 +61,7 @@ node {
       // Download our Spring Application Artifacts from Artifactory
       stage("Pull Spring Music Artifacts") {
         sh '''
-          curl -u${ART_USERNAME}:${ART_PASSWORD} -O "${ARTIFACT_URL}/${SPRING_APP}.zip"
+          curl -u${ART_USERNAME}:${ART_PASSWORD} -O "${ARTIFACT_URL}${SPRING_APP}.zip"
           unzip ${SPRING_APP}.zip
           '''
       }
