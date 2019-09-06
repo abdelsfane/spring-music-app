@@ -14,7 +14,7 @@ node {
     SPRING_APP = "Spring-Music-App"
     APPLICATION_NAME = "${BUILD_USER_FIRST_NAME}-${SPRING_APP}"
     DEPLOY_SPACE = "Development"
-    PCF_ORG = "csnpworkshop01"
+    PCF_ORG = "abdel_csnp_workshop"
     ARTIFACT_URL = "http://3.17.145.188:8081/artifactory/chicago-workshop/"
     SONARQUBE_ENDPOINT = "http://18.188.152.100:9000"
     PCF_ENDPOINT = "https://api.run.pivotal.io"
