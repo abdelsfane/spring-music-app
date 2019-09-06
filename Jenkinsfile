@@ -30,7 +30,7 @@ node {
       ],
       [
       $class          : 'UsernamePasswordMultiBinding',
-      credentialsId   : 'abdel_pcf_user',
+      credentialsId   : 'yourname_pcf_user',
       passwordVariable: 'PCF_PASSWORD',
       usernameVariable: 'PCF_USERNAME'
       ],[
