@@ -102,11 +102,8 @@ node {
         env.DEPLOY_SPACE = DEPLOY_SPACE
         env.PCF_ORG = PCF_ORG
         env.SPRING_APP = SPRING_APP
-        env.ARTIFACT_URL = ARTIFACT_URL
         env.PCF_USERNAME = PCF_USERNAME
         env.PCF_PASSWORD = PCF_PASSWORD
-        env.ART_USERNAME = ART_USERNAME
-        env.ART_PASSWORD = ART_PASSWORD
 
       stage("Deploy to PCF ${DEPLOY_SPACE}") {
         sh '''
