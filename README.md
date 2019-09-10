@@ -1,3 +1,13 @@
+[CyberSecurity NP](https://www.cybersecuritynp.org) is an organization dedicated to promoting the education of cyber security nationally in local communities. Check out our [Chapters](https://www.cybersecuritynp.org/chapters/)
+
+![CyberSecurity NP](https://www.cybersecuritynp.org/wp-content/uploads/2019/07/logo-no-website.png)
+
+======================================================================================
+This a sample demo to demonstrate how we can automate building an app, run a security scan and deploy it in the cloud
+
+
+
+
 Spring Music App
 ============
 
