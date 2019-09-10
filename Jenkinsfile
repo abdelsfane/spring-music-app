@@ -30,7 +30,7 @@ node {
       ],
       [
       $class          : 'UsernamePasswordMultiBinding',
-      credentialsId   : 'yourname_pcf_user',
+      credentialsId   : 'abdel_pcf_user',
       passwordVariable: 'PCF_PASSWORD',
       usernameVariable: 'PCF_USERNAME'
       ],[
@@ -42,7 +42,7 @@ node {
 
   // ------------------------------- Spin Up Docker Container ------------------------------------------------
 
-    docker.image('alpine').withRun('-u root'){
+    docker.image('maven:3-ibmjava-8-alpine').inside(){
       withEnv(['HOME=.']) {
         env.APPLICATION_NAME = APPLICATION_NAME
         env.PCF_ENDPOINT = PCF_ENDPOINT
@@ -92,7 +92,19 @@ node {
           curl -u${ART_USERNAME}:${ART_PASSWORD} -T spring-music-1.0.${BUILD_NUMBER}.jar "${ARTIFACT_URL}${APPLICATION_NAME}_${BUILD_NUMBER}.jar"
           '''
       }
-      // Deploy our application to Pivotal Web Services
+     }
+    }
+    // Deploy our application to Pivotal Web Services
+    docker.image('pcvolkmer/cloudfoundry-cli').inside(){
+      withEnv(['HOME=.']) {
+        env.APPLICATION_NAME = APPLICATION_NAME
+        env.PCF_ENDPOINT = PCF_ENDPOINT
+        env.DEPLOY_SPACE = DEPLOY_SPACE
+        env.PCF_ORG = PCF_ORG
+        env.SPRING_APP = SPRING_APP
+        env.PCF_USERNAME = PCF_USERNAME
+        env.PCF_PASSWORD = PCF_PASSWORD
+
       stage("Deploy to PCF ${DEPLOY_SPACE}") {
         sh '''
           cd ~/$PROJECT_NAME/${SPRING_APP}/build/libs
@@ -102,11 +114,11 @@ node {
           cf logout
           '''
         }
-        stage("Cleaning Worksapce") {
-          cleanWs()
+      stage("Cleaning Worksapce") {
+        cleanWs()
         }
+       }
       }
     }
   }
- }
 }
