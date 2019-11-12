@@ -12,12 +12,13 @@ node {
 
   // ------------------------------- Define Variables ------------------------------------------------
     SPRING_APP = "spring-music-app"
-    APPLICATION_NAME = "${BUILD_USER_FIRST_NAME}-${SPRING_APP}"
+    APPLICATION_NAME = "${BUILD_USER_ID}-${SPRING_APP}"
     DEPLOY_SPACE = "Development"
-    PCF_ORG = "my_first_workshop"
-    ARTIFACT_URL = "http://3.17.145.188:8081/artifactory/chicago-workshop/"
+    PCF_ORG = "YOUR_PCF_ORG_NAME"
+    ARTIFACT_URL = "http://18.216.57.173:8081/artifactory/sample-test/"
     SONARQUBE_ENDPOINT = "http://18.188.152.100:9000"
     PCF_ENDPOINT = "https://api.run.pivotal.io"
+    SLEEP_SECONDS = 5
 
 
   // ------------------------------- Use Jenkins Credential Store ------------------------------------------------
@@ -104,6 +105,7 @@ node {
         env.SPRING_APP = SPRING_APP
         env.PCF_USERNAME = PCF_USERNAME
         env.PCF_PASSWORD = PCF_PASSWORD
+        env.SLEEP_SECONDS = SLEEP_SECONDS
 
       stage("Deploy to PCF ${DEPLOY_SPACE}") {
         sh '''
@@ -111,9 +113,36 @@ node {
           cf login -a ${PCF_ENDPOINT} -u ${PCF_USERNAME} -p ${PCF_PASSWORD} --skip-ssl-validation
           cf target -o ${PCF_ORG} -s ${DEPLOY_SPACE}
           cf push ${APPLICATION_NAME} -p spring-music-1.0.${BUILD_NUMBER}.jar -b https://github.com/cloudfoundry/java-buildpack.git
-          cf logout
           '''
         }
+      stage("View Results"){
+        sh '''
+        echo "Please visit the Following URLs to View ${APPLICATION_NAME}'s Results"
+        echo
+        echo "Artifactory: http://18.216.57.173:8081/artifactory/webapp/#/artifacts/browse/tree/General/sample-test"
+        echo
+        echo "SonarQube User/Password = system/csnpworkshop01"
+        echo
+        echo "SonarQube URL: http://18.188.152.100:9000/projects"
+        echo
+        echo "See your running application on PCF: https://console.run.pivotal.io"
+        echo
+        echo "Your Application Direct URL:" https://${APPLICATION_NAME}.cfapps.io
+        echo
+        echo sleeping for ${SLEEP_SECONDS} before stoping your application
+        sleep ${SLEEP_SECONDS}
+        '''
+      }
+
+      stage("Stopping ${APPLICATION_NAME}"){
+        sh '''
+        cf login -a ${PCF_ENDPOINT} -u ${PCF_USERNAME} -p ${PCF_PASSWORD} --skip-ssl-validation
+        cf target -o ${PCF_ORG} -s ${DEPLOY_SPACE}
+        cf stop ${APPLICATION_NAME}
+        cf logout
+        echo "Your app has been stopped. Please adjust the sleep timer above if you don't want the app to be stopped"
+        '''
+      }
       stage("Cleaning Worksapce") {
         cleanWs()
         }
