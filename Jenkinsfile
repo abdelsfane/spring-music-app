@@ -12,10 +12,10 @@ node {
 
   // ------------------------------- Define Variables ------------------------------------------------
     SPRING_APP = "spring-music-app"
-    APPLICATION_NAME = "${BUILD_USER_FIRST_NAME}-${SPRING_APP}"
+    APPLICATION_NAME = "${BUILD_USER_FIRST_NAME}-${BUILD_USER_LAST_NAME}-${SPRING_APP}"
     DEPLOY_SPACE = "Development"
     PCF_ORG = "my_first_workshop"
-    ARTIFACT_URL = "http://3.17.145.188:8081/artifactory/chicago-workshop/"
+    ARTIFACT_URL = "http://18.216.57.173:8081/artifactory/sample-test/"
     SONARQUBE_ENDPOINT = "http://18.188.152.100:9000"
     PCF_ENDPOINT = "https://api.run.pivotal.io"
 
@@ -112,6 +112,8 @@ node {
           cf target -o ${PCF_ORG} -s ${DEPLOY_SPACE}
           cf push ${APPLICATION_NAME} -p spring-music-1.0.${BUILD_NUMBER}.jar -b https://github.com/cloudfoundry/java-buildpack.git
           cf logout
+          echo "To see your running application, login to https://console.run.pivotal.io"
+          echo "To go directly to your application, follow this url:" https://${APPLICATION_NAME}.cfapps.io
           '''
         }
       stage("Cleaning Worksapce") {
