@@ -11,7 +11,7 @@ node {
     checkout scm
 
   // ------------------------------- Define Variables ------------------------------------------------
-    SPRING_APP = "spring-music-master"
+    SPRING_APP = "spring-music-app"
     APPLICATION_NAME = "${BUILD_USER_ID}-${SPRING_APP}"
     DEPLOY_SPACE = "Development"
     PCF_ORG = "security_lab"
