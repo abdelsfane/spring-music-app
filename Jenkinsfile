@@ -11,10 +11,10 @@ node {
     checkout scm
 
   // ------------------------------- Define Variables ------------------------------------------------
-    SPRING_APP = "spring-music-app"
+    SPRING_APP = "spring-music-master"
     APPLICATION_NAME = "${BUILD_USER_ID}-${SPRING_APP}"
     DEPLOY_SPACE = "Development"
-    PCF_ORG = "YOUR_PCF_ORG_NAME"
+    PCF_ORG = "security_lab"
     ARTIFACT_URL = "http://18.216.57.173:8081/artifactory/sample-test/"
     SONARQUBE_ENDPOINT = "http://18.188.152.100:9000"
     PCF_ENDPOINT = "https://api.run.pivotal.io"
