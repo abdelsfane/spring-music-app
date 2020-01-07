@@ -13,11 +13,17 @@ node {
   // ------------------------------- Define Variables ------------------------------------------------
     SPRING_APP = "spring-music-app"
     APPLICATION_NAME = "${BUILD_USER_ID}-${SPRING_APP}"
+<<<<<<< HEAD
     PCF_ENV = "preproduction"
     PCF_ORG = "security_lab"
     PCF_SPACE = "development"
     PCF_ENDPOINT = "https://test-deployadactyl.cfapps.io/v3/apps/"
     ARTIFACT_URL = "http://18.216.57.173:8081/artifactory/csnp/"
+=======
+    DEPLOY_SPACE = "Development"
+    PCF_ORG = "security_lab"
+    ARTIFACT_URL = "http://18.216.57.173:8081/artifactory/sample-test/"
+>>>>>>> b142640c69a9c913aa68c8a1841111024d475590
     SONARQUBE_ENDPOINT = "http://18.188.152.100:9000"
     SERVICE_ENDPOINT = "18.224.64.196:8080"
     SLEEP_SECONDS = 5
