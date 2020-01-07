@@ -7,7 +7,7 @@ This a sample demo to demonstrate how we can automate building an app, run a sec
 
 Questions?
 ==========
-*Please contact info@cybersecuritynp.org*
+*Please contact info@csnp.org*
 
 
 Spring Music App

@@ -1,0 +1,6 @@
+applications:
+- name: spring-music-app
+memory: 512M
+instances: 1
+buildpack: https://github.com/cloudfoundry/java-buildpack.git
+path: spring-music-1.0.jar
