@@ -25,6 +25,7 @@ do
     then
         echo -e "Scan completed!\n"
         echo "No vulnerabilities found, deploying ${APPLICATION_NAME}..."
+        cd "${WORKSPACE}"/"$PROJECT_NAME"
         curl -X POST \
             -H 'Content-Type: application/zip' \
             --data-binary @"pcf_artifacts.zip" \
@@ -34,6 +35,10 @@ do
     then
         echo -e "Scan Completed!\n"
         echo -e "Security Test Failed! Cannot Deploy ${APPLICATION_NAME}!"
+        exit 1
+    elif [[ "$results" =~ "null" ]]
+    then
+        echo "Return value is null!"
         exit 1
     else
         echo "Something went wrong! Please review logs"
